@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 const App = () => {
   const anecdotes = [
-    'If it hurts, do it more often.',
+    'If it hurts, do it more often',
     'Adding manpower to a late software project makes it later!',
     'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
     'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
@@ -10,28 +10,34 @@ const App = () => {
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
-  ]
-   
-  const [selected, setSelected] = useState(0)
-  // Console log to check initial state of selected
-  console.log("Initial selected anecdote: ", selected)
+  ];
+  
+  const [selected, setSelected] = useState(0);
+  console.log("Selected anecdote is:",selected)
 
-  const handleButtonClick = () => {
-    const randomIndex = Math.floor(Math.random() * anecdotes.length);
-    // Console log to check generated random index
-    console.log("Random Index: ", randomIndex)
-    setSelected(randomIndex);
-    // Console log to check the value of selected after setting new value
-    console.log("New selected anecdote: ", selected)
-  }
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
+  console.log("vote results are:",votes)
+  
+  const handleAnecdoteClick = () => {
+    setSelected(Math.floor(Math.random() * anecdotes.length));
+  };
+
+  const handleVoteClick = (grade) => {
+    const votesCopy = [...votes];
+    votesCopy[selected] += grade;
+    setVotes(votesCopy);
+  };
 
   return (
     <div>
-      {anecdotes[selected]}
-      <br />
-      <button onClick={handleButtonClick}>Get Anecdote</button>
+      <div>"{anecdotes[selected]}"</div>
+      <br/>
+      <div>this anecdote has {votes[selected]} votes</div>
+      <button onClick={() => handleVoteClick(1)}>Vote</button>
+      <button onClick={handleAnecdoteClick}>Get Anecdote</button>
+      
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
