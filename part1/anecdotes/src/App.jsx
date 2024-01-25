@@ -13,29 +13,41 @@ const App = () => {
   ];
   
   const [selected, setSelected] = useState(0);
-  console.log("Selected anecdote is:",selected)
-
+  console.log("rendering with anecdote index:",selected)
   const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
-  console.log("vote results are:",votes)
+  console.log("rendering with votes:",votes)
   
   const handleAnecdoteClick = () => {
-    setSelected(Math.floor(Math.random() * anecdotes.length));
+    const randomIndex = Math.floor(Math.random() * anecdotes.length);
+    setSelected(randomIndex);
   };
 
-  const handleVoteClick = (grade) => {
+  const handleVoteClick = () => {
     const votesCopy = [...votes];
-    votesCopy[selected] += grade;
+    votesCopy[selected] += 1;
     setVotes(votesCopy);
   };
 
+  const getMostVotedAnecdote = () => {
+    const maxVotes = Math.max(...votes);
+    const index = votes.indexOf(maxVotes);
+    return anecdotes[index];
+  };
+
+  const maxVotes = Math.max(...votes);
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <div>"{anecdotes[selected]}"</div>
       <br/>
       <div>this anecdote has {votes[selected]} votes</div>
-      <button onClick={() => handleVoteClick(1)}>Vote</button>
+      <button onClick={handleVoteClick}>Vote</button>
       <button onClick={handleAnecdoteClick}>Get Anecdote</button>
-      
+      <h1>Anecdote with most votes</h1>
+      <div>"{getMostVotedAnecdote()}"</div>
+      <br />
+      {maxVotes > 0 && <div>most popular anecdote has {maxVotes} votes</div>}
     </div>
   );
 };
