@@ -4,9 +4,17 @@ const Button = ({ text, handleClick }) => {
   return <button onClick={handleClick}>{text}</button>
 }
 
+
+// a <p> tag (paragraph tag) is not valid inside a <tbody> tag. 
+// I used a <tr> (table row) and <td> (table data) instead, or 
+// <th> (table header) tags inside a <tbody> tag.
+
 const StatisticLine = ({ text, value }) => {
   return (
-    <p>{text} {isNaN(value) ? value : value.toFixed(2)}</p>
+    <tr>
+      <td>{text}</td>
+      <td>{isNaN(value) ? value : value.toFixed(2)}</td>
+    </tr>
   )
 }
 
@@ -27,11 +35,15 @@ const Statistics = ({good, neutral, bad}) => {
   return (
     <>
       <h1>Statistics</h1>
-      <StatisticLine text="good" value={good}/>
-      <StatisticLine text="neutral" value={neutral}/>
-      <StatisticLine text="bad" value={bad}/>
-      <StatisticLine text="average" value={average}/>
-      <StatisticLine text="positive" value={positive}/>
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={good}/>
+          <StatisticLine text="neutral" value={neutral}/>
+          <StatisticLine text="bad" value={bad}/>
+          <StatisticLine text="average" value={average}/>
+          <StatisticLine text="positive" value={positive}/>
+        </tbody>
+      </table>
     </>
   )
 }
