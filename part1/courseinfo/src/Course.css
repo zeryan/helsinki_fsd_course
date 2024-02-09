@@ -1,0 +1,25 @@
+/* Course.css */
+
+.course {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .course-header {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .course-content {
+    margin-left: 20px;
+  }
+  
+  .course-part {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-left: 3px solid #5cb85c;
+  }
